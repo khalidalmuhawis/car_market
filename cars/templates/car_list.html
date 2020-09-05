@@ -1,19 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Car List</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Car List{% endblock title %}
+{% block content %}
+<br>
+<div class="row">
 	{% for car in cars %}
-		<a href="{{car.get_absolute_url}}">
-			<h1>
-				{{car.make}} - {{car.model}}
-				<small>
-					{{car.year}}
-				</small>
-			</h1>
-		</a>
-		<hr>
+	<div class="col-md-4">
+				<div class="card my-card">
+					<div class="card-body">
+						{% if car.img %}
+						<img src="{{car.img.url}}" alt="picture">
+						{% endif %}
+						<a href="{{car.get_absolute_url}}">
+						<h5 class="card-title">{{car.make}}</h5>
+						<p class="card-text">{{car.model}}</p>
+						<small>{{car.year}}</small>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item text-center">
+								<a href="{% url 'car-detail' car.id %}" class="btn btn-outline-dark">View</a>
+						</li>
+					</ul>
+				</div>
+		</div>
 	{% endfor %}
-</body>
-</html>
+</div>
+	{% endblock content %}
+
+
+
+
+
+
+	<div class="col-md-4">
+        <div class="card my-card">
+          <div class="card-body">
+            <a href="{{car.get_absolute_url}}">
+            <h5 class="card-title">{{car.make}}</h5>
+            <p class="card-text">{{car.model}}</p>
+						<small>{{car.year}}</small>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">
+                <a href="{% url 'car-detail' car_id %}" class="btn btn-outline-dark">View</a>
+            </li>
+          </ul>
+        </div>
+    </div>
